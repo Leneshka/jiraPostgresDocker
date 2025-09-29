@@ -1,0 +1,35 @@
+version: '3'
+# Based on https://idalko.com/dockerize-jira-with-postgres/
+services:
+
+  jira_software:
+    container_name: jira_eleven_postgres
+    image: atlassian/jira-software:11
+    ports:
+      - "9090:8080"
+    depends_on:
+      - jira_postgres
+    volumes:
+      - /opt/jira
+    networks:
+      - network
+
+  jira_postgres:
+    container_name: my_postgres_for_jira
+    image: postgres:9.6.3
+    ports:
+      - "65432:5432"
+    volumes:
+      - /var/lib/postgresql/data
+      - ./config/init.sh:/docker-entrypoint-initdb.d/init.sh
+    environment:
+      - DB_PASS=<database_password>
+      - DB_NAME=jira
+      - DB_USER=<database_user>>
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge
+
