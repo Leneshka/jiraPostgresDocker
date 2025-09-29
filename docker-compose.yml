@@ -25,7 +25,7 @@ services:
     environment:
       - DB_PASS=<database_password>
       - DB_NAME=jira
-      - DB_USER=<database_user>>
+      - DB_USER=<database_user>
     networks:
       - network
 
