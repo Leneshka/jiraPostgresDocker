@@ -1,5 +1,13 @@
 version: '3'
 # Based on https://idalko.com/dockerize-jira-with-postgres/
+#
+# Next steps:
+#  - provide db parameters from .env file to this file and to dbconfig.xml.j2 template for Jira
+#    See https://bitbucket.org/atlassian-docker/docker-atlassian-jira/src/master/config/dbconfig.xml.j2
+#  - provide ip of postgres dynamically instead of hardcoded 172.18.0.2
+#
+# Full automatization is impossible due to jira license part
+#
 services:
 
   jira_software:
@@ -11,7 +19,6 @@ services:
       - jira_postgres
     volumes:
       - /opt/jira
-      - ./config/dbconfig.xml:/var/atlassian/application-data/jira/dbconfig.xml
     networks:
       - network
 
