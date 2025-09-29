@@ -11,6 +11,7 @@ services:
       - jira_postgres
     volumes:
       - /opt/jira
+      - ./config/dbconfig.xml:/var/atlassian/application-data/jira/dbconfig.xml
     networks:
       - network
 
